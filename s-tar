@@ -1,0 +1,3 @@
+#!/bin/bash
+
+find $* -name "hmmsort.mat" -or -name "learn*.o*" -or -name "*.hdf5" | xargs tar -cvzf sort.tar

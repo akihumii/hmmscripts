@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cwd=`pwd`
+
+for i in $(cat nodecodedirs.txt); do
+    echo $i
+    cd $i
+    rm decode*
+    cp ~/hmmsort/decode_job0000.pbs ./dj.pbs
+    # insert current directory into pbs file
+    sed "2 a cd $PWD" dj.pbs > decode_job0000.pbs
+    rm dj.pbs
+    # submit job
+    qsub decode_job0000.pbs
+    cd $cwd
+done
+
+    

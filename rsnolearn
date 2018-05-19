@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cwd=`pwd`
+
+for i in $(cat nolearndirs.txt); do
+    echo $i
+    cd $i
+    rm -r hmmsort decode* learn*
+    ~/hmmsort/hmmsort_pbs.py ~/hmmsort
+    cd $cwd
+done
+
+    

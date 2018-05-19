@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/hmmsort/hmmsort_pbs.py ~/hmmsort

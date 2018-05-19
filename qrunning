@@ -1,0 +1,22 @@
+#!/bin/bash
+
+cwd=`pwd`;
+
+cd ~/hpctmp/Data;
+
+echo "Learn"
+for i in `qstat | grep R | grep learn | awk '{print $1}'`; do 
+    let jid=`echo $i | cut -d '.' -f1`; 
+    echo $jid; 
+    find . -name "decode*pbs" | xargs grep -A 1 $jid; 
+done
+
+echo "Decode"
+for i in `qstat | grep R | grep decode | awk '{print $1}'`; do
+    let jid=`echo $i | cut -d '.' -f1`; 
+    echo $jid; 
+    let jid--; 
+    find . -name "decode*pbs" | xargs grep -A 1 $jid; 
+done; 
+
+cd $cwd

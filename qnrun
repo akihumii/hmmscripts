@@ -1,0 +1,4 @@
+#!/bin/bash
+
+qstat | grep R | wc -l
+
