@@ -16,7 +16,7 @@ qstat | head -$line
 ;;
 
 2)
-qstat | sed -n '32,64p'
+qstat | sed -n '32,94p'
 ;;
 
 *)

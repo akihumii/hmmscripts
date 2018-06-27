@@ -5,8 +5,17 @@
 count=1
 lastNum=6
 
+filename='hpctmp2space'
+filename+=$(date +%Y%m%d%H%M%S)
+filename+='.txt'
+
+echo
+echo $filename has been created...
+echo
+
 while :
-do hpc space | sed -n '14p'
+do hpc space | sed -n '14p' >> $filename
+hpc space | sed -n '14p'
 
 for ((j=count;j<=lastNum;j++))
 do printf ' '
