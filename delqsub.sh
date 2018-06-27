@@ -1,5 +1,7 @@
 #!/bin/bash
 
-for i in {$1..$2}
-do qdel $i
+#for i in {$1..$2}
+for ((i=$1;i<=$2;i++))
+do 
+qdel $i
 done

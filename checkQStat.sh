@@ -1,10 +1,29 @@
 #!/bin/bash
 
+## input 1 for showing the first few lines, input 2 for showing the middle few lines
+
 count=1
 lastNum=6
 
+line=32
+
 while :
-do qstat | head -32
+do
+
+case $1 in
+1)
+qstat | head -$line
+;;
+
+2)
+qstat | sed -n '32,64p'
+;;
+
+*)
+qstat | head -$line
+;;
+
+esac
 
 #for i in $(seq 1 $count)
 for ((j=count;j<=lastNum;j++))
