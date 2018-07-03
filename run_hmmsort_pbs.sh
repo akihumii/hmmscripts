@@ -13,10 +13,15 @@ rm -rf decode* learn* hmmsort;
 
 case $1 in
 1)
-~/hmmsort/hmmsort_pbs.py ~/hmmsort # run hmmsort_pbs.py 
+~/hmmsort/hmmsort_pbs_orig.py ~/hmmsort # run with short queue
+;;
+
+2)
+~/hmmsort/hmmsort_pbs.py ~/hmmsort # submit with matlab queue
 ;;
 
 *)
+echo jobs output and hmmsort folders are removed...
 ;;
 
 esac
