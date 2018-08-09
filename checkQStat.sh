@@ -16,22 +16,22 @@ do
 case $1 in
 1)
 qstat | sort | head -$line
-qstat | sort | head -$line >> $filename 
+qstat | sort | head -$line | grep -v "Job" >> $filename 
 ;;
 
 2)
 qstat | sort | sed -n '32,94p'
-qstat | sort | sed -n '32,94p' >> $filename
+qstat | sort | sed -n '32,94p' | grep -v "Job" >> $filename
 ;;
 
 3)
 qstat | sort | tail -$line 
-qstat | sort | tail -$line >> $filename
+qstat | sort | tail -$line | grep -v "Job" >> $filename
 ;;
 
 *)
-qstat | sort | head -$line 
-qstat | sort | head -$line >> $filename
+qstat | sort | head -$line | grep -v "Job" 
+qstat | sort | head -$line | grep -v "Job" >> $filename
 ;;
 
 esac
