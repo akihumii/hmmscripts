@@ -16,7 +16,6 @@ grep -l spikeforms $(cat learnfiles.txt) | adirfiles | sort > nosuadirs.txt
 find . -name "transferred.txt" | adirfiles | sort > transferreddirs.txt
 
 wc -l highpassdirs.txt learndirs.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
-wc -l transferreddirs.txt
 
 echo "Still sorting..."
 comm -23 highpassdirs.txt learndirs.txt > nolearndirs.txt
@@ -45,4 +44,4 @@ done
 
 rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
 
-wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt notransferreddirs.txt
+wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt
