@@ -2,7 +2,7 @@
 
 cwd=`pwd`
 
-for i in $(cat hmmfail.txt); do
+for i in $(cat hmmfail.txt nolearndirs.txt | sort | uniq); do
     echo $i
     cd $i
     rm -r hmmsort decode* learn* eyehplfpHPC* rplhighpass.mat rpllfp.mat transfer*
