@@ -5,7 +5,7 @@ find . -name "rplhighpass.mat" | adirfiles | sort > highpassdirs.txt
 # find completed learn jobs
 find . -name "learn_job*.o*" | sort > learnfiles.txt
 # find directories with completed learn jobs
-cat learnfiles.txt | adirfiles | sort > learndirs.txt
+cat learnfiles.txt | adirfiles | sort | uniq > learndirs.txt
 # find directories with completed learn jobs that found sua
 grep -l sigma $(cat learnfiles.txt) | adirfiles | sort > suadirs.txt
 # find directories with completed decode jobs
@@ -37,11 +37,11 @@ cat hmmfail.txt
 for i in $(cat hmmfail.txt); do echo $i; tail -n 20 $i/learn*.o*; done
 
 echo "Not transferred..."
-comm -23 learndirs.txt transferreddirs.txt > notransferreddirs.txt
+cat highpassdirs.txt transferreddirs.txt nodecodedirs.txt | sort | uniq -u > notransferreddirs.txt
 for i in `cat notransferreddirs.txt`; do
     echo $i
 done
 
-rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
+#rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
 
 wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt
