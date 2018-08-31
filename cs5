@@ -11,7 +11,7 @@ grep -l sigma $(cat learnfiles.txt) | adirfiles | sort > suadirs.txt
 # find directories with completed decode jobs
 find . -name "hmmsort.mat" | adirfiles | sort > hmmsortdirs.txt
 # find directories with completed learn jobs that did not find any sua
-grep -l spikeforms $(cat learnfiles.txt) | adirfiles | sort > nosuadirs.txt
+grep -l spikeforms $(cat learnfiles.txt) | adirfiles | sort | uniq > nosuadirs.txt
 # find directories with completed transfer jobs
 find . -name "transferred.txt" | adirfiles | sort > transferreddirs.txt
 
