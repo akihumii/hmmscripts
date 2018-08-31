@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ $(checkLs.sh | wc -l) -eq 110 -o $(checkLs.sh | wc -l) -eq 124 ]; then
+echo All are not run through eyehplfp... Please run submiteye.sh to rerun the eyehplfp before running this...
+else
+
 # find directories with data to sort
 find . -name "rplhighpass.mat" | adirfiles | sort > highpassdirs.txt
 # find completed learn jobs
@@ -45,3 +49,4 @@ done
 #rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
 
 wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt
+fi
