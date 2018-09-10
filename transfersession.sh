@@ -2,18 +2,15 @@
 
 cwd=$PWD
 
-sessionDir=${cwd##*/}
-dayDir=${cwd%/*}
-dayDir=${dayDir##*/}
+sessionDir=${cwd:`expr index "$cwd" 2018`-1}
 
-targetName='/volume1/Hippocampus/Data/picasso/'
-targetName+=$dayDir
+targetDir='/volume1/Hippocampus/Data/picasso/'
+targetDir+=$sessionDir
 
-fileName=${sessionDir}.tar.gz
-fullFileName=${targetName}/$fileName
-tar -cvf $fileName rplparallel.mat rsData.mat rplsplit.mat rsHPC_submit_file.txt.* nolearndirs.txt nodecodedirs.txt hmmfail.txt 
-scp -P 8398 $fileName hippocampus@cortex.nus.edu.sg:$targetName
-ssh -p 8398 hippocampus@cortex.nus.edu.sg tar -xvf $fullFileName -C ${targetName}/$sessionDir
-ssh -p 8398 hippocampus@cortex.nus.edu.sg rm -v $fullFileName
-rm -v $fileName
+echo $targetDir
+
+ssh -p 8398 hippocampus@cortex.nus.edu.sg mkdir -p $targetDir
+scp -P 8398 -vr 20180910_Notes.txt CellActivityLog.new.xlsx Electrode\ movement\ notes.xlsx P9_10.edf results_Set1_2018_9_10.mat 18* analog rplparallel.mat rsData.mat rplsplit.mat rsHPC_submit_file.txt.* nolearndirs.txt nodecodedirs.txt hmmfail.txt RawData_T1* hippocampus@cortex.nus.edu.sg:$targetDir &&
+rm -rv * &&
+touch transferredSession.txt
 

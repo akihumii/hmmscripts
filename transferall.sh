@@ -1,13 +1,18 @@
 #!/bin/bash
+#PBS -q serial
 
-cwd=$PWD
+cd $PBS_O_WORKDIR
 
-find . -name 'channel???' | while IFS= read i; do
-    echo $i
-    cd $i
-    rm transfer_job0001.pbs.*
-    qsub ~/hmmsort/transfer_job0001.pbs
-    cd $cwd
-done
+cd session01 &&
+~/hmmscripts/transfersession.sh &&
 
-    
+cd ../sessiontest &&
+~/hmmscripts/transfersession.sh &&
+
+cd ../sessioneye &&
+~/hmmscripts/transfersession.sh &&
+
+cd .. &&
+~/hmmscripts/transfersession.sh &&
+
+
