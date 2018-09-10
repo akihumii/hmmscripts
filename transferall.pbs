@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -q serial
+
+cd $PBS_O_WORKDIR
+
+cd session01 &&
+echo $PWD &&
+~/hmmscripts/transfersession.sh &&
+
+cd ../sessiontest &&
+echo $PWD &&
+~/hmmscripts/transfersession.sh &&
+
+cd ../sessioneye &&
+echo $PWD &&
+~/hmmscripts/transfersession.sh &&
+
+cd .. &&
+echo $PWD &&
+~/hmmscripts/transfersession.sh 
+
+
