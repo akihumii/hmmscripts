@@ -13,6 +13,6 @@ cd ../sessioneye &&
 ~/hmmscripts/transfersession.sh &&
 
 cd .. &&
-~/hmmscripts/transfersession.sh &&
+~/hmmscripts/transfersession.sh 
 
 
