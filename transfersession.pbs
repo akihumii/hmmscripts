@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -q serial
+
+cd $PBS_O_WORKDIR
+
+cwd=$PWD
+
+sessionDir=${cwd:`expr index "$cwd" 2018`-1}
+
+targetDir='/volume1/Hippocampus/Data/picasso/'
+targetDir+=$sessionDir
+
+ssh -p 8398 hippocampus@cortex.nus.edu.sg mkdir -p $targetDir
+scp -P 8398 -vr 18* rplparallel.mat rsData.mat rplsplit.mat rsHPC_submit_file.txt.* nolearndirs.txt nodecodedirs.txt hmmfail.txt RawData_T1* hippocampus@cortex.nus.edu.sg:$targetDir &&
+rm -rv * &&
+touch transferredSession.txt
+
