@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $(checkLs.sh | wc -l) -eq 110 -o $(checkLs.sh | wc -l) -eq 124 ]; then
-echo All are not run through eyehplfp... Please run submiteye.sh to rerun the eyehplfp before running this...
+echo try sending command checkLs.sh to check the contents of the channels directories...
 else
 
 # find directories with data to sort
