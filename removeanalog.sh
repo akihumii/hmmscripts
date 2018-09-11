@@ -2,9 +2,9 @@
 
 cwd=$PWD
 
-find . -name 'analog' | while IFS= read i; do 
+find . -name 'channel*' | while IFS= read i; do 
 
-echo $i
+#echo $i
 cd $i
 
 find . ! -name 'rplraw.mat' | while IFS= read file; do 
