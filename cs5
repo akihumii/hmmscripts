@@ -40,8 +40,9 @@ grep -L sigma $(cat learnfiles.txt) | xargs grep -L spikeforms | adirfiles | sor
 cat hmmfail.txt
 for i in $(cat hmmfail.txt); do echo $i; tail -n 20 $i/learn*.o*; done
 
+find . -name 'channel*' | grep -v 'analog' > allchannels.txt
 echo "Not transferred..."
-cat highpassdirs.txt transferreddirs.txt nodecodedirs.txt | sort | uniq -u > notransferreddirs.txt
+cat allchannels.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
 for i in `cat notransferreddirs.txt`; do
     echo $i
 done
