@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $(checkLs.sh | wc -l) -eq 110 -o $(checkLs.sh | wc -l) -eq 124 ]; then
-echo All are not run through eyehplfp... Please run submiteye.sh to rerun the eyehplfp before running this...
+echo try sending command checkLs.sh to check the contents of the channels directories...
 else
 
 # find directories with data to sort
@@ -40,8 +40,10 @@ grep -L sigma $(cat learnfiles.txt) | xargs grep -L spikeforms | adirfiles | sor
 cat hmmfail.txt
 for i in $(cat hmmfail.txt); do echo $i; tail -n 20 $i/learn*.o*; done
 
+find . -name 'channel*' | adirfiles | grep -v 'analog' > allraw.txt
+
 echo "Not transferred..."
-cat highpassdirs.txt transferreddirs.txt nodecodedirs.txt | sort | uniq -u > notransferreddirs.txt
+cat allraw.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
 for i in `cat notransferreddirs.txt`; do
     echo $i
 done

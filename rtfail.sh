@@ -1,13 +1,14 @@
 #!/bin/bash
 
-cwd=`pwd`
+cwd=$PWD
 
 for i in $(cat notransferreddirs.txt); do
     echo $i
     cd $i
-    rm transfer_job0001.pbs.*
-    qsub ~/hmmsort/transfer_job0001.pbs
-    cd $cwd
+    ~/hmmscripts/transfersession.sh &&
+    touch transferred.txt
+    #qsub ~/hmmscripts/transfersession.pbs
+cd $cwd
 done
 
     
