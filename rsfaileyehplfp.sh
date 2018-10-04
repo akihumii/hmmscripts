@@ -2,6 +2,7 @@
 
 cwd=`pwd`
 
+#for i in $(cat notransferreddirs.txt); do
 for i in $(cat hmmfail.txt nolearndirs.txt | sort | uniq); do
     echo $i
     cd $i
