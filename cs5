@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $(checkLs.sh | wc -l) -eq 110 -o $(checkLs.sh | wc -l) -eq 124 ]; then
+if [ $(checkLs.sh | wc -l) -eq 110 -o $(checkLs.sh | wc -l) -eq 124 -o $(checkLs.sh | wc -l) -eq 128 ]; then
 echo try sending command checkLs.sh to check the contents of the channels directories...
 else
 
