@@ -36,19 +36,28 @@ for i in `cat nodecodedirs.txt`; do
 done
 
 echo "hmmlearn failed..."
-grep -L sigma $(cat learnfiles.txt) | xargs grep -L spikeforms | adirfiles | sort > hmmfail.txt
+grep -LE 'sigma|spikeforms' $(cat learnfiles.txt) | adirfiles | sort > hmmfail.txt
 cat hmmfail.txt
 for i in $(cat hmmfail.txt); do echo $i; tail -n 20 $i/learn*.o*; done
 
-find . -name 'channel*' | adirfiles | grep -v 'analog' > allraw.txt
+find . -name 'channel*' > allchannels.txt
+#find . -name 'channel*' | adirfiles | grep -v 'analog' > allraw.txt
 
 echo "Not transferred..."
-cat allraw.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
-for i in `cat notransferreddirs.txt`; do
-    echo $i
-done
+cat allchannels.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
+#cat allraw.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
+#for i in `cat notransferreddirs.txt`; do
+#    echo $i
+#done
+
+echo "Failed transferred..."
+find . -name 'transfer_job0000.pbs.e*' | adirfiles > allTE.txt
+cat notransferreddirs.txt allTE.txt | sort | uniq -d > failedTransferred.txt
+cat failedTransferred.txt
+
+rm allTE.txt
 
 #rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
 
-wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt
+wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt failedTransferred.txt
 fi
