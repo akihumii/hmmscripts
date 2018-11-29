@@ -46,11 +46,18 @@ find . -name 'channel*' > allchannels.txt
 echo "Not transferred..."
 cat allchannels.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
 #cat allraw.txt transferreddirs.txt nodecodedirs.txt hmmfail.txt nolearndirs.txt | sort | uniq -u > notransferreddirs.txt
-for i in `cat notransferreddirs.txt`; do
-    echo $i
-done
+#for i in `cat notransferreddirs.txt`; do
+#    echo $i
+#done
+
+echo "Failed transferred..."
+find . -name 'transfer_job0000.pbs.e*' | adirfiles > allTE.txt
+cat notransferreddirs.txt allTE.txt | sort | uniq -d > failedTransferred.txt
+cat failedTransferred.txt
+
+rm allTE.txt
 
 #rm highpassdirs.txt learndirs.txt learnfiles.txt suadirs.txt hmmsortdirs.txt nosuadirs.txt
 
-wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt
+wc -l hmmfail.txt nolearndirs.txt nodecodedirs.txt transferreddirs.txt notransferreddirs.txt failedTransferred.txt
 fi
