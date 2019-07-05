@@ -2,7 +2,9 @@
 
 cwd=$PWD
 
-sessionDir=${cwd:`expr index "$cwd" 2018`-1}
+year="2018"
+index="${cwd%%$year*}"
+sessionDir=${cwd:${#index}}
 
 targetDir='/volume1/Hippocampus/Data/picasso/'
 targetDir+=$sessionDir
