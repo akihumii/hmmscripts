@@ -4,7 +4,7 @@
 
 if [ “$3” == “hmmsort” ] ; then
 	# transfer data to hippocampus
-	# scp -r $1 $2@atlas7:~/hpctmp/Data/ &&
+	scp -r $1 $2@atlas7:~/hpctmp/Data/ &&
 
 	# create a transferdone.txt file as indication
 	ssh $2@atlas7 "cd ~/hpctmp/Data/$1 && touch transferdone.txt"
@@ -19,7 +19,7 @@ if [ “$3” == “hmmsort” ] ; then
 	ssh $2@atlas7 'cd ~/hpctmp/Data/'$1' && echo $PWD && matlab2016b2 -nojvm -nosplash -nodisplay -r 	"ProcessLevel(rplsplit,'\''Levels'\'','\''Day'\'','\''SaveLevels'\'',3,'\''SkipLFP'\'','\''SkipOSort'\'', '\''Channels'\'', 1:124,'\''UseHPC'\'','\''HPCCmd'\'','\''source ~/.bash_profile; source /etc/profile.d/rec_modules.sh; module load pbs; qsub $GITHUB_MATLAB/Hippocampus/Compiler/rplsplit/rsHPC_submit_file.txt'\''); exit" && touch submitprocessdone.txt'
 elif [ “$3” == “osort” ] ; then
 	# transfer data to hippocampus
-       # scp -r $1 $2@atlas7:~/hpctmp/Data/ &&
+       scp -r $1 $2@atlas7:~/hpctmp/Data/ &&
 
 	# create a transferdone.txt file as indication
        ssh $2@atlas7 "cd ~/hpctmp/Data/$1 && touch transferdone.txt"
